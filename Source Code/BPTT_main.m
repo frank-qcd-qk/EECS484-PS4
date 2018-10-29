@@ -100,7 +100,7 @@ while niters>0
                   rms_err=sqrt(Esqd/T_time_steps)
                  figure(1)
                 plot(time_vec,targets,'*',time_vec,outputs,'o');
-                pause
+                %pause %! Took away the break, keeps running!
         end
     end
     %F_wji %debug

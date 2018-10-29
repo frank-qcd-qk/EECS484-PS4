@@ -11,10 +11,10 @@ F_o_vec = zeros(Nneurons,1);
 % for t< final time, dE/dsigma(t) depends on dE/du(t+1)
 if t<T_time_steps   
     F_u_vec=F_u(:,t+1);
-    F_o_vec = (W'*F_u_vec); %Fixing
+    F_o_vec = (W'*F_u_vec); %Fixed
 end
 
 F_o_vec(1)=0; %don't change bias = neuron 1
 F_o_vec(2)=0; %don't change input = neuron 2
 %for output node, neuron 3, add in influences of partial deriv of errors w/rt sigmas at time t
-F_o_vec(3) = F_o_vec(3)+errs(t); %Fixing
+F_o_vec(3) = F_o_vec(3)+errs(t); %Fixed

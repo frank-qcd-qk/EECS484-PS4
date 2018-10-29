@@ -7,5 +7,5 @@ T_time_steps=temp(2);
 
 F_u_vec = zeros(Nneurons,1); %initialize vector of dE/du(t) to zeros
 for j=3:Nneurons %only care about neurons 3 through final
-    F_u_vec(j) = F_o(j,t)*gprimes(j,t); %Fixing
+    F_u_vec(j) = F_o(j,t)*gprimes(j,t); %Fixed
 end
