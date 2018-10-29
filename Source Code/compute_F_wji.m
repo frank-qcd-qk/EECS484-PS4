@@ -7,3 +7,11 @@ F_wji = zeros(Nneurons,Nneurons); %create holder for output with correct dimensi
 
 %compute sum of F_uvals terms over time:
 %DO SOMETHING REAL HERE
+%Fixing
+for j = 1:Nneurons
+    for i = 1:Nneurons
+        for t = 2:(T_time_steps)
+            F_wji(j,i) = F_wji(j,i)+F_u(j,t)*sigma_history(i,t-1);
+        end
+    end
+end
