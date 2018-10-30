@@ -1,4 +1,4 @@
-# EECS484-PS1
+# EECS484-PS4
 This is used for tracking EECS 484 Homework 4
 Code created by CXQ41@case.edu, the great and smart Frank Qian (Just kidding)...
 
