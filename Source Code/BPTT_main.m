@@ -90,7 +90,7 @@ while niters > 0
         %debug--test derivs relative to numerical approx
         %approx_F_wji should be the same as F_wji
         %COMMENT this out once F_wji is debugged
-        [approx_F_wji] = test_dEsqd_dwji(W, sigma_history, u_history, targets)
+        %[approx_F_wji] = test_dEsqd_dwji(W, sigma_history, u_history, targets)
 
         %update weights:
         W = W - ETA * F_wji; %same as back-propagation
