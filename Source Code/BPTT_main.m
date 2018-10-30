@@ -46,7 +46,8 @@ sigma_history(4:Nneurons, 1) = rand(Nneurons - 3, 1); %all other nodes at time 1
 
 %iterate on learning:
 niters = 1
-
+recorderA = [];
+recorderB = [];
 while niters > 0
 
     for iiter = 1:niters
@@ -98,8 +99,7 @@ while niters > 0
         sigma_history(4:Nneurons, 1) = sigma_history(4:Nneurons, 1) - ETASIG * F_sigmas(4:Nneurons, 1);
         %every 100 iterations, print out the fit error and update a
         %graphical display of target values and output values
-        recorderA = [];
-        recorderB = [];
+
         if mod(iiter, 100) == 0
             iiter%iteration number
             recorderA = [recorderA,iiter];
