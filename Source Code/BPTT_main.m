@@ -7,15 +7,16 @@
 %set output neuron to be neuron 3,
 % additional neurons are 4 through Nneurons
 clear all
-Nneurons = 3; %CHOOSE THIS; N=4 for  single "interneuron" case
+Nneurons = 5; %CHOOSE THIS; N=4 for  single "interneuron" case
 INIT_WEIGHT_MAG = 1.0; %scale synapse initializations to random number +/- in this range
 ETA = 0.01; %learning factor--tune this
 ETASIG = 0.01; %learning weight for adjusting initial conditions of interneurons--tune this
 %read in the training file:
 load beats.dat%simple pattern
 %alternatively, uncomment next two lines to use second, more complex pattern
-%load beats2.dat
-%beats=beats2;
+load beats2.dat
+load beats3.dat
+beats=beats2;
 temp = size(beats);
 T_time_steps = temp(1);
 time_vec = (1:T_time_steps);
@@ -48,6 +49,7 @@ sigma_history(4:Nneurons, 1) = rand(Nneurons - 3, 1); %all other nodes at time 1
 niters = 1
 recorderA = [];
 recorderB = [];
+stored_rms_err = 0;
 while niters > 0
 
     for iiter = 1:niters
@@ -99,15 +101,20 @@ while niters > 0
         sigma_history(4:Nneurons, 1) = sigma_history(4:Nneurons, 1) - ETASIG * F_sigmas(4:Nneurons, 1);
         %every 100 iterations, print out the fit error and update a
         %graphical display of target values and output values
-
         if mod(iiter, 100) == 0
             iiter%iteration number
             recorderA = [recorderA,iiter];
-            rms_err = sqrt(Esqd / T_time_steps)
-            recorderB = [recorderB,rms_err];
+            new_rms_err = sqrt(Esqd / T_time_steps);
+            recorderB = [recorderB,new_rms_err];
             figure(1)
             plot(time_vec, targets, '*', time_vec, outputs, 'o');
             %pause %! Took away the break, keeps running!
+            if (new_rms_err<stored_rms_err) %oops; decrease step size and back up
+                ETA=1.1*ETA; 
+            else
+                ETA = ETA*0.9 
+            end
+            stored_rms_err = new_rms_err;
         end
 
     end
