@@ -16,7 +16,7 @@ load beats.dat%simple pattern
 %alternatively, uncomment next two lines to use second, more complex pattern
 load beats2.dat
 load beats3.dat
-beats=beats2;
+beats = beats2;
 temp = size(beats);
 T_time_steps = temp(1);
 time_vec = (1:T_time_steps);
@@ -50,6 +50,7 @@ niters = 1
 recorderA = [];
 recorderB = [];
 stored_rms_err = 0;
+
 while niters > 0
 
     for iiter = 1:niters
@@ -103,17 +104,18 @@ while niters > 0
         %graphical display of target values and output values
         if mod(iiter, 100) == 0
             iiter%iteration number
-            recorderA = [recorderA,iiter];
+            recorderA = [recorderA, iiter];
             new_rms_err = sqrt(Esqd / T_time_steps);
-            recorderB = [recorderB,new_rms_err];
+            recorderB = [recorderB, new_rms_err];
             figure(1)
             plot(time_vec, targets, '*', time_vec, outputs, 'o');
             %pause %! Took away the break, keeps running!
-            if (new_rms_err<stored_rms_err) %oops; decrease step size and back up
-                ETA=1.1*ETA; 
+            if (new_rms_err < stored_rms_err)%oops; decrease step size and back up
+                ETA = ETA * 1.1;
             else
-                ETA = ETA*0.9 
+                ETA = ETA * 0.9;
             end
+
             stored_rms_err = new_rms_err;
         end
 
