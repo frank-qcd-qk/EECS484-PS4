@@ -91,7 +91,7 @@ while niters > 0
         [F_wji] = compute_F_wji(sigma_history, F_uvals)%INSERT ; TO SUPPRESS PRINTING ONCE DEBUGGED
 
         %debug--test derivs relative to numerical approx
-        % %approx_F_wji should be the same as F_wji
+        %approx_F_wji should be the same as F_wji
         %COMMENT this out once F_wji is debugged
         %[approx_F_wji] = test_dEsqd_dwji(W, sigma_history, u_history, targets)
 
